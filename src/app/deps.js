@@ -5,9 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // fontawesome
 import 'font-awesome/css/font-awesome.min.css'
 
-// diretiva de grids angular
-import 'angular-gridster';
-
 // componentes de gráficos
 import 'd3/build/d3';
 
