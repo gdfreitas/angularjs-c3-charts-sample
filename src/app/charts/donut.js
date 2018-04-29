@@ -2,6 +2,9 @@ import _ from 'lodash'
 import { getRandomColor } from '../colors'
 
 const title = 'Desgaste por peça'
+const emptyLabel = 'Não há dados para exibir';
+const chartHeight = 250;
+const chartWidth = 500;
 
 const points = [
     { 'bracadeira': 45, 'parafuso': 15, 'broca': 10, 'britadeira': 20 }
@@ -22,4 +25,4 @@ const refresh = (points, columns) => {
     columns.forEach((c) => c.color = getRandomColor());
 }
 
-export { title, points, columns, refresh }
+export { title, emptyLabel, chartHeight, chartWidth, points, columns, refresh }

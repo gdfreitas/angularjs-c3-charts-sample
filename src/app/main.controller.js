@@ -9,19 +9,24 @@ import * as line from './charts/line';
 
 import { DEFAULT_COLORS, getRandomColor } from './colors'
 
-export default class AppCtrl {
+var vm; // helper
 
-    constructor($interval) {
-        const vm = this;
+class MainController {
 
+    constructor($timeout) {
+        vm = this;
+        vm.$timeout = $timeout;
         this.transitionDuration = 1500;
 
-        Object.assign(vm, {
-            $interval, DEFAULT_COLORS, gauge, pie, donut, horizontalBar, verticalBar, line
-        })
+        Object.assign(this, { DEFAULT_COLORS, gauge, pie, donut, horizontalBar, verticalBar, line })
+    }
+
+    onChartCallback(chart) {
+        console.log(chart)
     }
 
     refresh() {
+
         gauge.refresh(this.gauge.points, this.gauge.columns)
         pie.refresh(this.pie.points, this.pie.columns);
         donut.refresh(this.donut.points, this.donut.columns);
@@ -35,6 +40,9 @@ export default class AppCtrl {
     }
 
     tooltipTitleFormat(data) {
+        console.log(data)
         return data;
     }
 }
+
+export default MainController;

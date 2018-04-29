@@ -12,11 +12,13 @@
         <div class="col-md-3">
             <c3chart 
                 bindto-id="gaugeChartId" 
-                transition-duration="{{vm.transitionDuration}}" 
-                empty-label="{{vm.gauge.emptyLabel}}"
                 chart-columns="vm.gauge.columns"
                 chart-data="vm.gauge.points"
-                enable-zoom="false">
+                transition-duration="{{vm.transitionDuration}}" 
+                empty-label="{{vm.gauge.emptyLabel}}"
+                show-labels="true" 
+                enable-zoom="false"
+                callback-function="vm.onChartCallback">
 
                 <chart-gauge 
                     units="{{vm.gauge.units}}"
@@ -29,7 +31,7 @@
                 </chart-gauge>
 
                 <chart-size chart-height="{{vm.gauge.chartHeight}}" chart-width="{{vm.gauge.chartWidth}}"/>
-                <chart-tooltip show-tooltip="true" group-tooltip="false"/>
+                <chart-tooltip show-tooltip="true" title-format-function="vm.gauge.tooltipTitleFormat"></chart-tooltip>
                 <chart-legend show-legend="true" legend-position="bottom"/>
 
             </c3chart>
@@ -37,45 +39,61 @@
 
         <div class="col-md-3">
             <c3chart 
-                bindto-id="pie-plot1-chart" 
-                transition-duration="{{vm.transitionDuration}}" 
-                sort-data="desc" 
+                bindto-id="pieChartId" 
                 chart-data="vm.pie.points" 
-                chart-columns="vm.pie.columns">
+                chart-columns="vm.pie.columns"
+                transition-duration="{{vm.transitionDuration}}" 
+                empty-label="{{vm.pie.emptyLabel}}"
+                show-labels="true" 
+                enable-zoom="false"
+                sort-data="asc" 
+                callback-function="vm.onChartCallback">
 
-                <chart-pie expand="true" show-label="true" threshold-label="0.1" />
+                <chart-pie expand="true" show-label="true" threshold-label="0.5" />
+                <chart-size chart-height="{{vm.pie.chartHeight}}" chart-width="{{vm.pie.chartWidth}}"/>
                 <chart-legend legend-position="right" />
+                <chart-tooltip show-tooltip="true" title-format-function="vm.pie.tooltipTitleFormat"></chart-tooltip>
 
             </c3chart>
         </div>
 
         <div class="col-md-3">
             <c3chart 
-                bindto-id="donutChart" 
-                transition-duration="{{vm.transitionDuration}}" 
+                bindto-id="donutChartId" 
                 chart-data="vm.donut.points"
                 chart-columns="vm.donut.columns" 
-                sort-data="null">
+                transition-duration="{{vm.transitionDuration}}" 
+                empty-label="{{vm.donut.emptyLabel}}"
+                show-labels="true" 
+                enable-zoom="false"
+                sort-data="asc" 
+                callback-function="vm.onChartCallback">
 
                 <chart-legend show-legend="true" />
+                <chart-size chart-height="{{vm.donut.chartHeight}}" chart-width="{{vm.donut.chartWidth}}"/>
                 <chart-donut expand="true" width="60" threshold-label="0.1" show-label="true" title="{{vm.donut.title}}" />
+                <chart-tooltip show-tooltip="true" title-format-function="vm.donut.tooltipTitleFormat"></chart-tooltip>
 
             </c3chart>
         </div>
 
         <div class="col-md-3">
             <c3chart 
-                bindto-id="chart1" 
-                show-labels="true" 
+                bindto-id="horizontalChartId" 
+                chart-data="vm.verticalBar.points" 
+                chart-columns="vm.verticalBar.columns"
                 transition-duration="{{vm.transitionDuration}}" 
-                chart-data="vm.horizontalBar.points" 
-                chart-columns="vm.horizontalBar.columns">
+                empty-label="{{vm.gauge.emptyLabel}}"
+                show-labels="true" 
+                enable-zoom="false"
+                sort-data="asc" 
+                callback-function="vm.onChartCallback">
 
                 <chart-bar ratio="0.8" />
+                <chart-size chart-height="{{vm.verticalBar.chartHeight}}" chart-width="{{vm.verticalBar.chartWidth}}"/>
                 <chart-legend legend-position="inset" legend-inset="top-left" />
-                <chart-colors color-pattern="blue" />
-                <chart-group group-values="{{vm.horizontalBar.groupValues}}" />
-                <chart-tooltip show-tooltip="false" title-format-function="vm.tooltipTitleFormat"></chart-tooltip>
+                <chart-group group-values="{{vm.verticalBar.groupBy}}" />
+                <chart-tooltip show-tooltip="true" title-format-function="vm.verticalBar.tooltipTitleFormat"></chart-tooltip>
                 <chart-grid show-x="true" show-y="true"></chart-grid>
 
             </c3chart>
@@ -83,15 +101,20 @@
 
         <div class="col-md-3">
             <c3chart 
-                bindto-id="chart2" 
+                bindto-id="horizontalBarId" 
+                chart-data="vm.horizontalBar.points" 
+                chart-columns="vm.horizontalBar.columns"
                 transition-duration="{{vm.transitionDuration}}" 
+                empty-label="{{vm.horizontalBar.emptyLabel}}"
                 show-labels="true" 
-                chart-data="vm.verticalBar.points" 
-                chart-columns="vm.verticalBar.columns">
+                enable-zoom="false"
+                sort-data="asc" 
+                callback-function="vm.onChartCallback">
 
                 <chart-bar ratio="0.8" />
-                <chart-legend legend-position="inset" legend-inset="top-left" />
-                <chart-colors color-pattern="green" />
+                <chart-size chart-height="{{vm.horizontalBar.chartHeight}}" chart-width="{{vm.horizontalBar.chartWidth}}"/>
+                <chart-legend legend-position="inset" legend-inset="top-right" />
+                <chart-tooltip show-tooltip="true" title-format-function="vm.horizontalBar.tooltipTitleFormat"></chart-tooltip>
                 <chart-axis axis-rotate="true" />
                 <chart-grid show-x="true" show-y="true" />
 
@@ -100,15 +123,19 @@
 
         <div class="col-md-3">
             <c3chart 
-                bindto-id="chart-timeseries" 
-                show-labels="true" 
-                padding-top="100px" 
-                transition-duration="{{vm.transitionDuration}}" 
+                bindto-id="lineChartId" 
                 chart-data="vm.line.points"
-                chart-columns="vm.line.columns">
+                chart-columns="vm.line.columns"
+                transition-duration="{{vm.transitionDuration}}" 
+                empty-label="{{vm.line.emptyLabel}}"
+                show-labels="true" 
+                enable-zoom="false"
+                sort-data="asc" 
+                callback-function="vm.onChartCallback">
 
                 <chart-line step-type="step-after" />
-                <chart-tooltip show-tooltip="true" />
+                <chart-size chart-height="{{vm.line.chartHeight}}" chart-width="{{vm.line.chartWidth}}"/>
+                <chart-tooltip show-tooltip="true" title-format-function="vm.line.tooltipTitleFormat"></chart-tooltip>
                 <chart-grid show-x="true" show-y="true" />
 
             </c3chart>

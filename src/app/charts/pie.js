@@ -1,6 +1,11 @@
 import _ from 'lodash'
 import { getRandomColor } from '../colors'
 
+const emptyLabel = 'Não há dados para exibir';
+const chartHeight = 250;
+const chartWidth = 500;
+
+
 const points = [
     { 'poupanca': 25, 'rendaFixa': 25, 'tesouroDireto': 25, 'acoes': 25 }
 ];
@@ -23,4 +28,4 @@ const refresh = (points, columns) => {
     });
 }
 
-export { points, columns, refresh }
+export { emptyLabel, chartHeight, chartWidth, points, columns, refresh }
