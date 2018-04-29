@@ -1,0 +1,118 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-dark" type="button" ng-click="vm.refresh()">
+                <i class="fa fa-refresh"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <c3chart 
+                bindto-id="gaugeChartId" 
+                transition-duration="{{vm.transitionDuration}}" 
+                empty-label="{{vm.gauge.emptyLabel}}"
+                chart-columns="vm.gauge.columns"
+                chart-data="vm.gauge.points"
+                enable-zoom="false">
+
+                <chart-gauge 
+                    units="{{vm.gauge.units}}"
+                    min="{{vm.gauge.min}}"
+                    max="{{vm.gauge.max}}"
+                    width="{{vm.gauge.width}}"
+                    show-label="true"
+                    label-format-function="vm.formatLabel"
+                    expand="true">
+                </chart-gauge>
+
+                <chart-size chart-height="{{vm.gauge.chartHeight}}" chart-width="{{vm.gauge.chartWidth}}"/>
+                <chart-tooltip show-tooltip="true" group-tooltip="false"/>
+                <chart-legend show-legend="true" legend-position="bottom"/>
+
+            </c3chart>
+        </div>
+
+        <div class="col-md-3">
+            <c3chart 
+                bindto-id="pie-plot1-chart" 
+                transition-duration="{{vm.transitionDuration}}" 
+                sort-data="desc" 
+                chart-data="vm.pie.points" 
+                chart-columns="vm.pie.columns">
+
+                <chart-pie expand="true" show-label="true" threshold-label="0.1" />
+                <chart-legend legend-position="right" />
+
+            </c3chart>
+        </div>
+
+        <div class="col-md-3">
+            <c3chart 
+                bindto-id="donutChart" 
+                transition-duration="{{vm.transitionDuration}}" 
+                chart-data="vm.donut.points"
+                chart-columns="vm.donut.columns" 
+                sort-data="null">
+
+                <chart-legend show-legend="true" />
+                <chart-donut expand="true" width="60" threshold-label="0.1" show-label="true" title="{{vm.donut.title}}" />
+
+            </c3chart>
+        </div>
+
+        <div class="col-md-3">
+            <c3chart 
+                bindto-id="chart1" 
+                show-labels="true" 
+                transition-duration="{{vm.transitionDuration}}" 
+                chart-data="vm.horizontalBar.points" 
+                chart-columns="vm.horizontalBar.columns">
+
+                <chart-bar ratio="0.8" />
+                <chart-legend legend-position="inset" legend-inset="top-left" />
+                <chart-colors color-pattern="blue" />
+                <chart-group group-values="{{vm.horizontalBar.groupValues}}" />
+                <chart-tooltip show-tooltip="false" title-format-function="vm.tooltipTitleFormat"></chart-tooltip>
+                <chart-grid show-x="true" show-y="true"></chart-grid>
+
+            </c3chart>
+        </div>
+
+        <div class="col-md-3">
+            <c3chart 
+                bindto-id="chart2" 
+                transition-duration="{{vm.transitionDuration}}" 
+                show-labels="true" 
+                chart-data="vm.verticalBar.points" 
+                chart-columns="vm.verticalBar.columns">
+
+                <chart-bar ratio="0.8" />
+                <chart-legend legend-position="inset" legend-inset="top-left" />
+                <chart-colors color-pattern="green" />
+                <chart-axis axis-rotate="true" />
+                <chart-grid show-x="true" show-y="true" />
+
+            </c3chart>
+        </div>
+
+        <div class="col-md-3">
+            <c3chart 
+                bindto-id="chart-timeseries" 
+                show-labels="true" 
+                padding-top="100px" 
+                transition-duration="{{vm.transitionDuration}}" 
+                chart-data="vm.line.points"
+                chart-columns="vm.line.columns">
+
+                <chart-line step-type="step-after" />
+                <chart-tooltip show-tooltip="true" />
+                <chart-grid show-x="true" show-y="true" />
+
+            </c3chart>
+        </div>
+
+    </div>
+</div>
